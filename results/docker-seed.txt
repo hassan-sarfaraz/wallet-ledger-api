@@ -1,0 +1,11 @@
+1000000 rows loaded in 15.26 seconds
+2000000 rows loaded in 44.44 seconds
+3000000 rows loaded in 74.00 seconds
+4000000 rows loaded in 103.11 seconds
+5000000 rows loaded in 133.21 seconds
+6000000 rows loaded in 164.35 seconds
+7000000 rows loaded in 200.20 seconds
+8000000 rows loaded in 235.56 seconds
+9000000 rows loaded in 270.82 seconds
+10000000 rows loaded in 306.76 seconds
+Complete: 10000000 rows, 100000 users, 100000 rows per hot user, 306.78 seconds.

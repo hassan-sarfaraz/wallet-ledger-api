@@ -1,0 +1,77 @@
+{
+  "status": "verified_with_documented_host_burst_limit",
+  "docker_desktop": "4.99.0",
+  "docker_engine": "29.9.3",
+  "compose": "5.7.0",
+  "wsl": "3.0.5.0",
+  "php": "8.3.36",
+  "laravel": "13.42.0",
+  "mysql": "8.4.13",
+  "apache": "2.4.68",
+  "api_image": "sha256:ee4210f46bf3d85264afb6ffd28479aeedad0472a6515bfcb6ffa881ce25d22e",
+  "compose_configuration_valid": true,
+  "windows_restart_required": false,
+  "engine_start_verified": true,
+  "image_build_verified": true,
+  "container_tests_verified": true,
+  "phpunit": {
+    "tests": 47,
+    "assertions": 214,
+    "warnings": 0
+  },
+  "seed": {
+    "rows": 10000000,
+    "users": 100000,
+    "rows_per_hot_user": 100000,
+    "seconds": 306.78
+  },
+  "post_test_dataset": {
+    "ledger_rows": 10040065,
+    "wallets": 100075
+  },
+  "host_concurrency": 100,
+  "internal_simultaneous_credits": 1000,
+  "mixed_load": {
+    "requests": 10000,
+    "concurrency": 100,
+    "failures": 0
+  },
+  "hot_load": {
+    "requests": 10000,
+    "concurrency": 100,
+    "failures": 0
+  },
+  "balance_reconciliation_passed": true,
+  "historical_nonnegative_check_passed": true,
+  "lifecycle": {
+    "crud_passed": true,
+    "insufficient_funds_passed": true,
+    "compose_down_up_persistence_passed": true,
+    "token_override_passed": true,
+    "old_token_rejected": true,
+    "original_token_restored": true,
+    "verified_balance": 12000,
+    "user_id": "lifecycle_6e36e886c1a140808f22e9cc072b1522"
+  },
+  "services": [
+    {
+      "service": "api",
+      "state": "running",
+      "health": null
+    },
+    {
+      "service": "mysql",
+      "state": "running",
+      "health": "healthy"
+    }
+  ],
+  "known_limits": [
+    "The Windows published-port 1000-client burst produced ECONNRESET and is not counted as a passing host test. The same 1000-client test passes on the Docker network. The published port passes the assessment-level 100-client mixed and hot workloads."
+  ],
+  "fixes": [
+    "Validate test database before migrations and isolate PHPUnit environment/cache.",
+    "Bound HTTP test-client connection pools and expose explicit concurrency selection.",
+    "Increase Apache keep-alive timeout from 1 to 5 seconds.",
+    "Add optional checks profile for the Docker-network stress test."
+  ]
+}

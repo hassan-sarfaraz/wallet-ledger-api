@@ -1,0 +1,353 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 555B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 926B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/php:8.3-apache-bookworm
+#3 DONE 2.5s
+
+#4 [internal] load metadata for docker.io/library/composer:2
+#4 DONE 3.5s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 315B 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 DONE 0.0s
+
+#7 FROM docker.io/library/composer:2@sha256:0c8e663f14c94d07b3c45b175c51f5a14718508f21fe4dd7e54f09488dd0ed71
+#7 resolve docker.io/library/composer:2@sha256:0c8e663f14c94d07b3c45b175c51f5a14718508f21fe4dd7e54f09488dd0ed71 0.1s done
+#7 DONE 0.1s
+
+#8 [stage-0 1/9] FROM docker.io/library/php:8.3-apache-bookworm@sha256:a14446c32a3c8aeb9b4dac7fb73b03dfd8006e670d9b43ea7947e4030d3cbae6
+#8 resolve docker.io/library/php:8.3-apache-bookworm@sha256:a14446c32a3c8aeb9b4dac7fb73b03dfd8006e670d9b43ea7947e4030d3cbae6 0.1s done
+#8 DONE 0.1s
+
+#6 [internal] load build context
+#6 transferring context: 35.52kB 0.1s done
+#6 DONE 0.1s
+
+#9 [stage-0 2/9] RUN apt-get update && apt-get install -y --no-install-recommends libonig-dev libxml2-dev libzip-dev unzip     && docker-php-ext-install -j$(nproc) pdo_mysql mbstring dom xml xmlwriter zip opcache     && a2enmod rewrite     && rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [stage-0 3/9] COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
+#10 CACHED
+
+#11 [stage-0 4/9] WORKDIR /var/www/html
+#11 CACHED
+
+#12 [stage-0 5/9] COPY . .
+#12 DONE 0.1s
+
+#13 [stage-0 6/9] RUN sed -ri 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf     && composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts     && chown -R www-data:www-data storage bootstrap/cache
+#13 1.117 Installing dependencies from lock file (including require-dev)
+#13 1.125 Verifying lock file contents can be installed on current platform.
+#13 2.139 Package operations: 109 installs, 0 updates, 0 removals
+#13 2.153   - Downloading doctrine/inflector (2.1.1)
+#13 2.155   - Downloading doctrine/lexer (3.0.3)
+#13 2.157   - Downloading dragonmantank/cron-expression (v3.6.1)
+#13 2.160   - Downloading symfony/deprecation-contracts (v3.8.1)
+#13 2.163   - Downloading psr/container (2.0.2)
+#13 2.165   - Downloading fakerphp/faker (v1.24.1)
+#13 2.166   - Downloading symfony/polyfill-mbstring (v1.43.3)
+#13 2.168   - Downloading symfony/http-foundation (v7.4.23)
+#13 2.170   - Downloading fruitcake/php-cors (v1.4.0)
+#13 2.171   - Downloading symfony/polyfill-php82 (v1.43.0)
+#13 2.173   - Downloading symfony/polyfill-php80 (v1.43.0)
+#13 2.175   - Downloading psr/http-message (2.0)
+#13 2.176   - Downloading psr/http-factory (1.1.0)
+#13 2.178   - Downloading psr/http-client (1.0.3)
+#13 2.180   - Downloading guzzlehttp/psr7 (3.4.0)
+#13 2.182   - Downloading guzzlehttp/promises (3.1.0)
+#13 2.183   - Downloading guzzlehttp/guzzle (8.5.1)
+#13 2.184   - Downloading guzzlehttp/uri-template (v2.0.1)
+#13 2.186   - Downloading symfony/polyfill-intl-normalizer (v1.43.0)
+#13 2.187   - Downloading symfony/polyfill-intl-grapheme (v1.43.3)
+#13 2.188   - Downloading symfony/polyfill-ctype (v1.37.0)
+#13 2.189   - Downloading symfony/string (v7.4.22)
+#13 2.190   - Downloading symfony/service-contracts (v3.8.1)
+#13 2.191   - Downloading symfony/console (v7.4.23)
+#13 2.193   - Downloading nunomaduro/termwind (v2.4.1)
+#13 2.195   - Downloading voku/portable-ascii (2.1.1)
+#13 2.197   - Downloading phpoption/phpoption (1.10.0)
+#13 2.198   - Downloading graham-campbell/result-type (v1.2.0)
+#13 2.200   - Downloading vlucas/phpdotenv (v5.8.0)
+#13 2.202   - Downloading symfony/css-selector (v7.4.22)
+#13 2.204   - Downloading tijsverkoyen/css-to-inline-styles (v2.4.0)
+#13 2.206   - Downloading symfony/var-dumper (v7.4.22)
+#13 2.206   - Downloading symfony/polyfill-uuid (v1.43.0)
+#13 2.207   - Downloading symfony/uid (v7.4.21)
+#13 2.209   - Downloading symfony/routing (v7.4.23)
+#13 2.210   - Downloading symfony/process (v7.4.22)
+#13 2.211   - Downloading symfony/polyfill-php86 (v1.43.0)
+#13 2.213   - Downloading symfony/polyfill-php85 (v1.44.0)
+#13 2.214   - Downloading symfony/polyfill-php84 (v1.43.0)
+#13 2.216   - Downloading symfony/polyfill-intl-idn (v1.43.0)
+#13 2.217   - Downloading symfony/mime (v7.4.22)
+#13 2.218   - Downloading psr/event-dispatcher (1.0.0)
+#13 2.220   - Downloading symfony/event-dispatcher-contracts (v3.8.1)
+#13 2.221   - Downloading symfony/event-dispatcher (v7.4.17)
+#13 2.222   - Downloading psr/log (3.0.2)
+#13 2.224   - Downloading egulias/email-validator (4.0.4)
+#13 2.226   - Downloading symfony/mailer (v7.4.22)
+#13 2.227   - Downloading symfony/error-handler (v7.4.22)
+#13 2.228   - Downloading symfony/http-kernel (v7.4.23)
+#13 2.230   - Downloading symfony/finder (v7.4.23)
+#13 2.232   - Downloading ramsey/collection (2.1.1)
+#13 2.234   - Downloading brick/math (1.0.0)
+#13 2.235   - Downloading ramsey/uuid (4.10.0)
+#13 2.236   - Downloading psr/simple-cache (3.0.0)
+#13 2.237   - Downloading symfony/translation-contracts (v3.8.1)
+#13 2.239   - Downloading symfony/translation (v7.4.23)
+#13 2.249   - Downloading symfony/polyfill-time (v1.42.0)
+#13 2.251   - Downloading symfony/polyfill-php83 (v1.43.0)
+#13 2.253   - Downloading psr/clock (1.0.0)
+#13 2.256   - Downloading symfony/clock (v7.4.21)
+#13 2.259   - Downloading carbonphp/carbon-doctrine-types (3.2.1)
+#13 2.274   - Downloading nesbot/carbon (3.15.1)
+#13 2.282   - Downloading monolog/monolog (3.13.0)
+#13 2.285   - Downloading league/uri-interfaces (7.10.0)
+#13 2.287   - Downloading league/uri (7.10.0)
+#13 2.295   - Downloading league/mime-type-detection (1.17.0)
+#13 2.297   - Downloading league/flysystem-local (3.35.3)
+#13 2.298   - Downloading league/flysystem (3.36.0)
+#13 2.303   - Downloading nette/utils (v4.1.6)
+#13 2.306   - Downloading nette/schema (v1.4.0)
+#13 2.317   - Downloading dflydev/dot-access-data (v3.0.3)
+#13 2.321   - Downloading league/config (v1.2.0)
+#13 2.323   - Downloading league/commonmark (2.10.7)
+#13 2.327   - Downloading laravel/serializable-closure (v2.2.0)
+#13 2.329   - Downloading laravel/prompts (v0.3.27)
+#13 2.332   - Downloading laravel/framework (v13.42.0)
+#13 2.335   - Downloading laravel/pail (v1.3.0)
+#13 2.338   - Downloading laravel/pint (v1.32.3)
+#13 2.341   - Downloading nikic/php-parser (v5.9.0)
+#13 2.344   - Downloading psy/psysh (v0.12.24)
+#13 2.346   - Downloading laravel/tinker (v3.1.0)
+#13 2.353   - Downloading hamcrest/hamcrest-php (v3.0.0)
+#13 2.364   - Downloading mockery/mockery (1.6.15)
+#13 2.364   - Downloading filp/whoops (2.19.3)
+#13 2.364   - Downloading nunomaduro/collision (v8.9.6)
+#13 2.372   - Downloading staabm/side-effects-detector (1.0.5)
+#13 2.378   - Downloading sebastian/version (6.0.2)
+#13 2.380   - Downloading sebastian/type (6.0.4)
+#13 2.382   - Downloading sebastian/recursion-context (7.0.1)
+#13 2.384   - Downloading sebastian/object-reflector (5.0.0)
+#13 2.388   - Downloading sebastian/object-enumerator (7.0.0)
+#13 2.390   - Downloading sebastian/global-state (8.0.3)
+#13 2.394   - Downloading sebastian/exporter (7.0.3)
+#13 2.395   - Downloading sebastian/environment (8.1.2)
+#13 2.397   - Downloading sebastian/diff (7.0.1)
+#13 2.398   - Downloading sebastian/comparator (7.1.8)
+#13 2.400   - Downloading sebastian/cli-parser (4.2.1)
+#13 2.402   - Downloading phpunit/php-timer (8.0.0)
+#13 2.403   - Downloading phpunit/php-text-template (5.0.1)
+#13 2.405   - Downloading phpunit/php-invoker (6.0.0)
+#13 2.406   - Downloading phpunit/php-file-iterator (6.0.2)
+#13 2.409   - Downloading theseer/tokenizer (2.0.1)
+#13 2.410   - Downloading sebastian/lines-of-code (4.0.1)
+#13 2.412   - Downloading sebastian/complexity (5.0.0)
+#13 2.414   - Downloading phpunit/php-code-coverage (12.5.8)
+#13 2.417   - Downloading phar-io/version (3.2.1)
+#13 2.419   - Downloading phar-io/manifest (2.0.4)
+#13 2.421   - Downloading myclabs/deep-copy (1.14.0)
+#13 2.423   - Downloading phpunit/phpunit (12.5.44)
+#13 2.591    0/109 [>---------------------------]   0%
+#13 4.231    3/109 [>---------------------------]   2%
+#13 4.899   13/109 [===>------------------------]  11%
+#13 5.688   23/109 [=====>----------------------]  21%
+#13 6.485   35/109 [========>-------------------]  32%
+#13 6.910   45/109 [===========>----------------]  41%
+#13 8.011   46/109 [===========>----------------]  42%
+#13 9.055   48/109 [============>---------------]  44%
+#13 10.06   56/109 [==============>-------------]  51%
+#13 11.08   60/109 [===============>------------]  55%
+#13 15.13   61/109 [===============>------------]  55%
+#13 16.22   62/109 [===============>------------]  56%
+#13 18.35   63/109 [================>-----------]  57%
+#13 19.51   64/109 [================>-----------]  58%
+#13 19.76   67/109 [=================>----------]  61%
+#13 20.82   69/109 [=================>----------]  63%
+#13 21.89   71/109 [==================>---------]  65%
+#13 23.11   72/109 [==================>---------]  66%
+#13 24.20   74/109 [===================>--------]  67%
+#13 25.30   75/109 [===================>--------]  68%
+#13 37.23   76/109 [===================>--------]  69%
+#13 38.36   77/109 [===================>--------]  70%
+#13 39.85   78/109 [====================>-------]  71%
+#13 41.99   79/109 [====================>-------]  72%
+#13 43.47   80/109 [====================>-------]  73%
+#13 44.63   81/109 [====================>-------]  74%
+#13 45.63   84/109 [=====================>------]  77%
+#13 48.65   87/109 [======================>-----]  79%
+#13 51.84   88/109 [======================>-----]  80%
+#13 52.97   89/109 [======================>-----]  81%
+#13 53.97   90/109 [=======================>----]  82%
+#13 56.06   91/109 [=======================>----]  83%
+#13 57.10   92/109 [=======================>----]  84%
+#13 58.19   93/109 [=======================>----]  85%
+#13 59.19   94/109 [========================>---]  86%
+#13 61.18   96/109 [========================>---]  88%
+#13 62.27   98/109 [=========================>--]  89%
+#13 64.24  100/109 [=========================>--]  91%
+#13 65.45  101/109 [=========================>--]  92%
+#13 69.45  102/109 [==========================>-]  93%
+#13 70.46  104/109 [==========================>-]  95%
+#13 76.72  105/109 [==========================>-]  96%
+#13 77.95  107/109 [===========================>]  98%
+#13 86.16  108/109 [===========================>]  99%
+#13 92.19  109/109 [============================] 100%
+#13 92.19   - Installing doctrine/inflector (2.1.1): Extracting archive
+#13 92.20   - Installing doctrine/lexer (3.0.3): Extracting archive
+#13 92.20   - Installing dragonmantank/cron-expression (v3.6.1): Extracting archive
+#13 92.20   - Installing symfony/deprecation-contracts (v3.8.1): Extracting archive
+#13 92.20   - Installing psr/container (2.0.2): Extracting archive
+#13 92.21   - Installing fakerphp/faker (v1.24.1): Extracting archive
+#13 92.21   - Installing symfony/polyfill-mbstring (v1.43.3): Extracting archive
+#13 92.21   - Installing symfony/http-foundation (v7.4.23): Extracting archive
+#13 92.21   - Installing fruitcake/php-cors (v1.4.0): Extracting archive
+#13 92.22   - Installing symfony/polyfill-php82 (v1.43.0): Extracting archive
+#13 92.22   - Installing symfony/polyfill-php80 (v1.43.0): Extracting archive
+#13 92.23   - Installing psr/http-message (2.0): Extracting archive
+#13 92.23   - Installing psr/http-factory (1.1.0): Extracting archive
+#13 92.23   - Installing psr/http-client (1.0.3): Extracting archive
+#13 92.23   - Installing guzzlehttp/psr7 (3.4.0): Extracting archive
+#13 92.23   - Installing guzzlehttp/promises (3.1.0): Extracting archive
+#13 92.24   - Installing guzzlehttp/guzzle (8.5.1): Extracting archive
+#13 92.24   - Installing guzzlehttp/uri-template (v2.0.1): Extracting archive
+#13 92.24   - Installing symfony/polyfill-intl-normalizer (v1.43.0): Extracting archive
+#13 92.24   - Installing symfony/polyfill-intl-grapheme (v1.43.3): Extracting archive
+#13 92.24   - Installing symfony/polyfill-ctype (v1.37.0): Extracting archive
+#13 92.25   - Installing symfony/string (v7.4.22): Extracting archive
+#13 92.25   - Installing symfony/service-contracts (v3.8.1): Extracting archive
+#13 92.25   - Installing symfony/console (v7.4.23): Extracting archive
+#13 92.25   - Installing nunomaduro/termwind (v2.4.1): Extracting archive
+#13 92.25   - Installing voku/portable-ascii (2.1.1): Extracting archive
+#13 92.25   - Installing phpoption/phpoption (1.10.0): Extracting archive
+#13 92.26   - Installing graham-campbell/result-type (v1.2.0): Extracting archive
+#13 92.26   - Installing vlucas/phpdotenv (v5.8.0): Extracting archive
+#13 92.26   - Installing symfony/css-selector (v7.4.22): Extracting archive
+#13 92.26   - Installing tijsverkoyen/css-to-inline-styles (v2.4.0): Extracting archive
+#13 92.26   - Installing symfony/var-dumper (v7.4.22): Extracting archive
+#13 92.26   - Installing symfony/polyfill-uuid (v1.43.0): Extracting archive
+#13 92.27   - Installing symfony/uid (v7.4.21): Extracting archive
+#13 92.27   - Installing symfony/routing (v7.4.23): Extracting archive
+#13 92.27   - Installing symfony/process (v7.4.22): Extracting archive
+#13 92.27   - Installing symfony/polyfill-php86 (v1.43.0): Extracting archive
+#13 92.27   - Installing symfony/polyfill-php85 (v1.44.0): Extracting archive
+#13 92.28   - Installing symfony/polyfill-php84 (v1.43.0): Extracting archive
+#13 92.28   - Installing symfony/polyfill-intl-idn (v1.43.0): Extracting archive
+#13 92.28   - Installing symfony/mime (v7.4.22): Extracting archive
+#13 92.28   - Installing psr/event-dispatcher (1.0.0): Extracting archive
+#13 92.28   - Installing symfony/event-dispatcher-contracts (v3.8.1): Extracting archive
+#13 92.28   - Installing symfony/event-dispatcher (v7.4.17): Extracting archive
+#13 92.29   - Installing psr/log (3.0.2): Extracting archive
+#13 92.29   - Installing egulias/email-validator (4.0.4): Extracting archive
+#13 92.29   - Installing symfony/mailer (v7.4.22): Extracting archive
+#13 92.29   - Installing symfony/error-handler (v7.4.22): Extracting archive
+#13 92.29   - Installing symfony/http-kernel (v7.4.23): Extracting archive
+#13 92.29   - Installing symfony/finder (v7.4.23): Extracting archive
+#13 92.30   - Installing ramsey/collection (2.1.1): Extracting archive
+#13 92.30   - Installing brick/math (1.0.0): Extracting archive
+#13 92.30   - Installing ramsey/uuid (4.10.0): Extracting archive
+#13 92.31   - Installing psr/simple-cache (3.0.0): Extracting archive
+#13 92.31   - Installing symfony/translation-contracts (v3.8.1): Extracting archive
+#13 92.32   - Installing symfony/translation (v7.4.23): Extracting archive
+#13 92.32   - Installing symfony/polyfill-time (v1.42.0): Extracting archive
+#13 92.32   - Installing symfony/polyfill-php83 (v1.43.0): Extracting archive
+#13 92.33   - Installing psr/clock (1.0.0): Extracting archive
+#13 92.34   - Installing symfony/clock (v7.4.21): Extracting archive
+#13 92.34   - Installing carbonphp/carbon-doctrine-types (3.2.1): Extracting archive
+#13 92.34   - Installing nesbot/carbon (3.15.1): Extracting archive
+#13 92.34   - Installing monolog/monolog (3.13.0): Extracting archive
+#13 92.35   - Installing league/uri-interfaces (7.10.0): Extracting archive
+#13 92.36   - Installing league/uri (7.10.0): Extracting archive
+#13 92.36   - Installing league/mime-type-detection (1.17.0): Extracting archive
+#13 92.36   - Installing league/flysystem-local (3.35.3): Extracting archive
+#13 92.36   - Installing league/flysystem (3.36.0): Extracting archive
+#13 92.36   - Installing nette/utils (v4.1.6): Extracting archive
+#13 92.37   - Installing nette/schema (v1.4.0): Extracting archive
+#13 92.37   - Installing dflydev/dot-access-data (v3.0.3): Extracting archive
+#13 92.37   - Installing league/config (v1.2.0): Extracting archive
+#13 92.38   - Installing league/commonmark (2.10.7): Extracting archive
+#13 92.38   - Installing laravel/serializable-closure (v2.2.0): Extracting archive
+#13 92.38   - Installing laravel/prompts (v0.3.27): Extracting archive
+#13 92.38   - Installing laravel/framework (v13.42.0): Extracting archive
+#13 92.38   - Installing laravel/pail (v1.3.0): Extracting archive
+#13 92.38   - Installing laravel/pint (v1.32.3): Extracting archive
+#13 92.39   - Installing nikic/php-parser (v5.9.0): Extracting archive
+#13 92.39   - Installing psy/psysh (v0.12.24): Extracting archive
+#13 92.39   - Installing laravel/tinker (v3.1.0): Extracting archive
+#13 92.39   - Installing hamcrest/hamcrest-php (v3.0.0): Extracting archive
+#13 92.39   - Installing mockery/mockery (1.6.15): Extracting archive
+#13 92.40   - Installing filp/whoops (2.19.3): Extracting archive
+#13 92.40   - Installing nunomaduro/collision (v8.9.6): Extracting archive
+#13 92.40   - Installing staabm/side-effects-detector (1.0.5): Extracting archive
+#13 92.40   - Installing sebastian/version (6.0.2): Extracting archive
+#13 92.40   - Installing sebastian/type (6.0.4): Extracting archive
+#13 92.41   - Installing sebastian/recursion-context (7.0.1): Extracting archive
+#13 92.41   - Installing sebastian/object-reflector (5.0.0): Extracting archive
+#13 92.41   - Installing sebastian/object-enumerator (7.0.0): Extracting archive
+#13 92.41   - Installing sebastian/global-state (8.0.3): Extracting archive
+#13 92.41   - Installing sebastian/exporter (7.0.3): Extracting archive
+#13 92.42   - Installing sebastian/environment (8.1.2): Extracting archive
+#13 92.42   - Installing sebastian/diff (7.0.1): Extracting archive
+#13 92.42   - Installing sebastian/comparator (7.1.8): Extracting archive
+#13 92.42   - Installing sebastian/cli-parser (4.2.1): Extracting archive
+#13 92.42   - Installing phpunit/php-timer (8.0.0): Extracting archive
+#13 92.42   - Installing phpunit/php-text-template (5.0.1): Extracting archive
+#13 92.43   - Installing phpunit/php-invoker (6.0.0): Extracting archive
+#13 92.43   - Installing phpunit/php-file-iterator (6.0.2): Extracting archive
+#13 92.44   - Installing theseer/tokenizer (2.0.1): Extracting archive
+#13 92.44   - Installing sebastian/lines-of-code (4.0.1): Extracting archive
+#13 92.44   - Installing sebastian/complexity (5.0.0): Extracting archive
+#13 92.44   - Installing phpunit/php-code-coverage (12.5.8): Extracting archive
+#13 92.45   - Installing phar-io/version (3.2.1): Extracting archive
+#13 92.46   - Installing phar-io/manifest (2.0.4): Extracting archive
+#13 92.50   - Installing myclabs/deep-copy (1.14.0): Extracting archive
+#13 92.50   - Installing phpunit/phpunit (12.5.44): Extracting archive
+#13 92.54    0/109 [>---------------------------]   0%
+#13 92.68   24/109 [======>---------------------]  22%
+#13 92.78   40/109 [==========>-----------------]  36%
+#13 92.90   58/109 [==============>-------------]  53%
+#13 93.01   71/109 [==================>---------]  65%
+#13 93.12   77/109 [===================>--------]  70%
+#13 93.24   89/109 [======================>-----]  81%
+#13 93.37  103/109 [==========================>-]  94%
+#13 93.59  109/109 [============================] 100%
+#13 94.55 Generating optimized autoload files
+#13 95.60 81 packages you are using are looking for funding.
+#13 95.60 Use the `composer fund` command to find out more!
+#13 DONE 95.9s
+
+#14 [stage-0 7/9] COPY docker/php.ini /usr/local/etc/php/conf.d/wallet.ini
+#14 DONE 0.1s
+
+#15 [stage-0 8/9] COPY docker/apache.conf /etc/apache2/conf-available/wallet.conf
+#15 DONE 0.1s
+
+#16 [stage-0 9/9] RUN a2enconf wallet && chmod +x docker/entrypoint.sh
+#16 0.334 Enabling conf wallet.
+#16 0.345 To activate the new configuration, you need to run:
+#16 0.345   service apache2 reload
+#16 DONE 0.4s
+
+#17 exporting to image
+#17 exporting layers
+#17 exporting layers 3.6s done
+#17 exporting manifest sha256:fa3db68313447c620b39bb53ecdd6d11fdadddc25a72e978574452299dee1b19 0.0s done
+#17 exporting config sha256:d2baf4101321faf8c92dc17dd41922bfb4b42879b70ca907fa41d683e0e87a89 0.0s done
+#17 exporting attestation manifest sha256:e14eb7d3de4fc497f1e34787f7491a4e3e128403901dc78b5f398d461bacbd29 0.0s done
+#17 exporting manifest list sha256:ee4210f46bf3d85264afb6ffd28479aeedad0472a6515bfcb6ffa881ce25d22e
+#17 exporting manifest list sha256:ee4210f46bf3d85264afb6ffd28479aeedad0472a6515bfcb6ffa881ce25d22e 0.0s done
+#17 naming to docker.io/library/wallet-ledger-api-api:latest done
+#17 unpacking to docker.io/library/wallet-ledger-api-api:latest
+#17 unpacking to docker.io/library/wallet-ledger-api-api:latest 2.8s done
+#17 DONE 6.6s
+
+#18 resolving provenance for metadata file
+#18 DONE 0.0s

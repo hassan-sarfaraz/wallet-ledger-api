@@ -1,0 +1,23 @@
+{
+  "concurrent_credits": {
+    "passed": true,
+    "concurrency": 100,
+    "count": 1000,
+    "p50_ms": 1028.803,
+    "p99_ms": 1249.649
+  },
+  "double_debit": {
+    "passed": true,
+    "repetitions": 20
+  },
+  "mixed_writes": {
+    "passed": true,
+    "count": 1000,
+    "p50_ms": 863.655,
+    "p99_ms": 1016.339
+  },
+  "read_your_writes": {
+    "passed": true,
+    "repetitions": 20
+  }
+}

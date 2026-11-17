@@ -1,0 +1,10 @@
+{
+  "crud_passed": true,
+  "insufficient_funds_passed": true,
+  "compose_down_up_persistence_passed": true,
+  "token_override_passed": true,
+  "old_token_rejected": true,
+  "original_token_restored": true,
+  "verified_balance": 12000,
+  "user_id": "lifecycle_6e36e886c1a140808f22e9cc072b1522"
+}

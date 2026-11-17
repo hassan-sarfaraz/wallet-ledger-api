@@ -1,0 +1,85 @@
+credit/create: INSERT INTO wallets (user_id, balance) VALUES (?, 0) ON DUPLICATE KEY UPDATE user_id = wallets.user_id
+[
+    {
+        "id": 1,
+        "select_type": "INSERT",
+        "table": "wallets",
+        "partitions": null,
+        "type": "ALL",
+        "possible_keys": null,
+        "key": null,
+        "key_len": null,
+        "ref": null,
+        "rows": null,
+        "filtered": null,
+        "Extra": null
+    }
+]
+credit/debit lock: SELECT balance FROM wallets WHERE user_id = ? LIMIT 1 FOR UPDATE
+[
+    {
+        "id": 1,
+        "select_type": "SIMPLE",
+        "table": "wallets",
+        "partitions": null,
+        "type": "const",
+        "possible_keys": "PRIMARY",
+        "key": "PRIMARY",
+        "key_len": "66",
+        "ref": "const",
+        "rows": 1,
+        "filtered": 100,
+        "Extra": null
+    }
+]
+credit/debit update: UPDATE wallets SET balance = ? WHERE user_id = ?
+[
+    {
+        "id": 1,
+        "select_type": "UPDATE",
+        "table": "wallets",
+        "partitions": null,
+        "type": "range",
+        "possible_keys": "PRIMARY",
+        "key": "PRIMARY",
+        "key_len": "66",
+        "ref": "const",
+        "rows": 1,
+        "filtered": 100,
+        "Extra": "Using where"
+    }
+]
+credit/debit append: INSERT INTO ledger (user_id, type, amount) VALUES (?, ?, ?)
+[
+    {
+        "id": 1,
+        "select_type": "INSERT",
+        "table": "ledger",
+        "partitions": null,
+        "type": "ALL",
+        "possible_keys": null,
+        "key": null,
+        "key_len": null,
+        "ref": null,
+        "rows": null,
+        "filtered": null,
+        "Extra": null
+    }
+]
+get_balance: SELECT balance FROM wallets WHERE user_id = ? LIMIT 1
+[
+    {
+        "id": 1,
+        "select_type": "SIMPLE",
+        "table": "wallets",
+        "partitions": null,
+        "type": "const",
+        "possible_keys": "PRIMARY",
+        "key": "PRIMARY",
+        "key_len": "66",
+        "ref": "const",
+        "rows": 1,
+        "filtered": 100,
+        "Extra": null
+    }
+]

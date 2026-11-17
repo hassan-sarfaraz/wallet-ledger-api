@@ -1,0 +1,31 @@
+{
+  "label": "Docker-10M",
+  "mode": "hot",
+  "requests": 10000,
+  "concurrency": 100,
+  "users": 100000,
+  "elapsed_seconds": 61.07,
+  "requests_per_second": 163.75,
+  "endpoints": {
+    "credit": {
+      "count": 3000,
+      "p50_ms": 897.853,
+      "p99_ms": 3241.522
+    },
+    "debit": {
+      "count": 3000,
+      "p50_ms": 908.221,
+      "p99_ms": 3261.429
+    },
+    "balance": {
+      "count": 4000,
+      "p50_ms": 8.248,
+      "p99_ms": 51.002
+    }
+  },
+  "statuses": {
+    "200": 10000
+  },
+  "failure_count": 0,
+  "failures": []
+}

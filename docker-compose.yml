@@ -1,0 +1,60 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: "base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      API_TOKEN: ${API_TOKEN:-recruitment-test-token}
+      DB_HOST: mysql
+      DB_DATABASE: wallet_ledger
+      DB_USERNAME: wallet
+      DB_PASSWORD: wallet-local-password
+      DB_PERSISTENT: "true"
+      CACHE_STORE: array
+      SESSION_DRIVER: array
+      QUEUE_CONNECTION: sync
+      LOG_CHANNEL: stderr
+      LOG_LEVEL: error
+    depends_on:
+      mysql:
+        condition: service_healthy
+    init: true
+    stop_grace_period: 30s
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: wallet_ledger
+      MYSQL_USER: wallet
+      MYSQL_PASSWORD: wallet-local-password
+      MYSQL_ROOT_PASSWORD: wallet-local-root-password
+    command:
+      - --max-connections=250
+      - --innodb-buffer-pool-size=512M
+      - --transaction-isolation=READ-COMMITTED
+      - --innodb-flush-log-at-trx-commit=1
+      - --sync-binlog=1
+      - --log-bin-trust-function-creators=1
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql-init.sql:/docker-entrypoint-initdb.d/testing.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_PASSWORD mysql -h 127.0.0.1 -u$$MYSQL_USER -D$$MYSQL_DATABASE -e 'SELECT 1' >/dev/null 2>&1"]
+      interval: 3s
+      timeout: 3s
+      retries: 60
+      start_period: 20s
+  checks:
+    image: node:22-alpine
+    profiles: [checks]
+    working_dir: /work
+    environment:
+      API_TOKEN: ${API_TOKEN:-recruitment-test-token}
+      BASE_URL: http://api
+    volumes:
+      - ./scripts:/work:ro
+      - ./results:/results
+volumes:
+  mysql-data:

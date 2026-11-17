@@ -1,0 +1,8 @@
+ledger_rows
+10040065
+wallet_count
+100075
+hot_user_rows
+110249
+mysql_version	isolation_level
+8.4.13	READ-COMMITTED

@@ -1,0 +1,31 @@
+{
+  "label": "1M-local",
+  "mode": "hot",
+  "requests": 3000,
+  "concurrency": 100,
+  "users": 100000,
+  "elapsed_seconds": 14.024,
+  "requests_per_second": 213.91,
+  "endpoints": {
+    "credit": {
+      "count": 900,
+      "p50_ms": 461.051,
+      "p99_ms": 717.884
+    },
+    "debit": {
+      "count": 900,
+      "p50_ms": 464.45,
+      "p99_ms": 725.475
+    },
+    "balance": {
+      "count": 1200,
+      "p50_ms": 440.992,
+      "p99_ms": 694.429
+    }
+  },
+  "statuses": {
+    "200": 3000
+  },
+  "failure_count": 0,
+  "failures": []
+}
